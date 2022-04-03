@@ -18,7 +18,14 @@ module filemanager{
     requires org.xerial.sqlitejdbc;
     requires javacv;
     requires opencv;
+    requires okhttp3;
+    requires io.github.classgraph;
+    requires  hutool.crypto;
+
+
+
     
+
     
     exports github.acodervic.filemanager.theme;
     opens github.acodervic.filemanager.theme;

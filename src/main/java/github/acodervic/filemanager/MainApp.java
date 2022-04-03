@@ -10,11 +10,14 @@ import org.sqlite.SQLiteDataSource;
 import github.acodervic.filemanager.device.LinuxDeviceMountter;
 import github.acodervic.filemanager.exception.FileManagerException;
 import github.acodervic.filemanager.gui.Icons;
+import github.acodervic.filemanager.gui.MainFrame;
 import github.acodervic.filemanager.theme.MyDark;
 import github.acodervic.filemanager.thread.ApiCallHttpServer;
 import github.acodervic.filemanager.thread.BackgroundTaskManager;
+import github.acodervic.filemanager.util.GuiUtil;
+import github.acodervic.mod.utilFun;
+import github.acodervic.mod.data.DirRes;
 import github.acodervic.mod.db.anima.Anima;
-import github.acodervic.mod.db.anima.core.JDBC;
 import github.acodervic.mod.db.anima.core.imlps.JdbiJDBC;
 
 public class MainApp  {
@@ -38,7 +41,7 @@ public class MainApp  {
 
 
             try {
-                JDBC dataBase=new JdbiJDBC();
+                JdbiJDBC dataBase=new JdbiJDBC();
                 SQLiteDataSource ds = new SQLiteDataSource();
                 ds.setUrl("jdbc:sqlite:/home/w/Documents/localgitserver/filemanager/db");
                 Boolean open = dataBase.open(ds);
@@ -54,14 +57,27 @@ public class MainApp  {
                 TaskDialogs.showException(new FileManagerException("Cant open database file "));
             }
 
-            
-            
             BackgroundTaskManager backgroundTaskManager = new BackgroundTaskManager();
-            //MainFrame mainFrame = new MainFrame(new DirRes("/"), backgroundTaskManager);
-            ApiCallHttpServer  apiCallHttpServer=new ApiCallHttpServer(64213,backgroundTaskManager,new LinuxDeviceMountter());
-            apiCallHttpServer.start();
-            //sftp://root@122.114.250.153/
-            //sftp://w:abc147268.@192.168.1.118/
+            
+            if (args.length>1&&args[0].toLowerCase()=="api") {
+                System.out.println("启用api模式,请求http://127.0.0.1:64213/newWindow 将自动创建window");
+                //MainFrame mainFrame = new MainFrame(new DirRes("/"), backgroundTaskManager);
+                ApiCallHttpServer  apiCallHttpServer=new ApiCallHttpServer(64213,backgroundTaskManager,new LinuxDeviceMountter());
+                apiCallHttpServer.start();
+            }else{
+                boolean linux = utilFun.isLinux();
+                if (linux) {
+                    MainFrame mainFrame = new MainFrame(GuiUtil.newLocalFIleStatic(linux?"/":"C://").get(), backgroundTaskManager,new LinuxDeviceMountter());
+                    mainFrame.setSize(1200, 800);
+                    mainFrame.setVisible(true);
+                }else{
+                     System.out.println("我们暂未对windows做好准备");
+                }
+            }
+
+            
+
+ 
     }
 }
 
