@@ -1,0 +1,126 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch PathWalker",
+            "request": "launch",
+            "mainClass": "filemanager/mrrobot.linux.filemanager.PathWalker",
+            "projectName": "filemanager"
+        },
+        {
+            "type": "java",
+            "name": "Launch VideoUtil",
+            "request": "launch",
+            "mainClass": "filemanager/mrrobot.linux.filemanager.util.VideoUtil",
+            "projectName": "filemanager"
+        },
+        {
+            "type": "java",
+            "name": "Launch ThumbnailatorThreadManager",
+            "request": "launch",
+            "mainClass": "filemanager/mrrobot.linux.filemanager.thread.ThumbnailatorThreadManager",
+            "projectName": "filemanager"
+        },
+        {
+            "type": "java",
+            "name": "Launch LocationToolPanel",
+            "request": "launch",
+            "mainClass": "filemanager/mrrobot.linux.filemanager.gui.LocationToolPanel",
+            "projectName": "filemanager"
+        },
+        {
+            "type": "java",
+            "name": "Launch TerminalPanel",
+            "request": "launch",
+            "mainClass": "filemanager/mrrobot.linux.filemanager.gui.TerminalPanel",
+            "projectName": "filemanager"
+        },
+        {
+            "type": "java",
+            "name": "Launch MainPanel",
+            "request": "launch",
+            "mainClass": "filemanager/mrrobot.linux.filemanager.gui.terminal.MainPanel",
+            "projectName": "filemanager"
+        },
+        {
+            "type": "java",
+            "name": "Launch MultiTerminal",
+            "request": "launch",
+            "mainClass": "filemanager/mrrobot.linux.filemanager.gui.terminal.MultiTerminal",
+            "projectName": "filemanager"
+        },
+        {
+            "type": "java",
+            "name": "Launch VFSTest",
+            "request": "launch",
+            "mainClass": "filemanager/mrrobot.linux.filemanager.VFSTest",
+            "projectName": "filemanager"
+        },
+        {
+            "type": "java",
+            "name": "Launch LinuxDeviceMountter",
+            "request": "launch",
+            "mainClass": "filemanager/mrrobot.linux.filemanager.device.LinuxDeviceMountter",
+            "projectName": "filemanager"
+        },
+        {
+            "type": "java",
+            "name": "Launch XdgOpenConfigManager",
+            "request": "launch",
+            "mainClass": "filemanager/mrrobot.linux.filemanager.config.XdgOpenConfigManager",
+            "projectName": "filemanager"
+        },
+        {
+            "type": "java",
+            "name": "Launch Terminal",
+            "request": "launch",
+            "mainClass": "filemanager/mrrobot.linux.filemanager.gui.Terminal",
+            "projectName": "filemanager"
+        },
+        {
+            "type": "java",
+            "name": "Launch CommandProcessor",
+            "request": "launch",
+            "mainClass": "filemanager/mrrobot.linux.filemanager.gui.CommandProcessor",
+            "projectName": "filemanager"
+        },
+        {
+            "type": "java",
+            "name": "Launch RESWallper",
+            "request": "launch",
+            "mainClass": "filemanager/mrrobot.linux.filemanager.model.RESWallper",
+            "projectName": "filemanager"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch MainApp",
+            "request": "launch",
+            "mainClass": "filemanager/mrrobot.linux.filemanager.MainApp",
+            "projectName": "filemanager"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "filemanager/mrrobot.linux.filemanager.gui.Main",
+            "projectName": "filemanager"
+        },
+        {
+            "type": "java",
+            "name": "Launch TreeTableExample0",
+            "request": "launch",
+            "mainClass": "filemanager/mrrobot.linux.filemanager.treetable.TreeTableExample0",
+            "projectName": "filemanager"
+        }
+    ]
+}
