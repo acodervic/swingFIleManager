@@ -77,7 +77,7 @@ public class MainApp  {
 
                         @Override
                         public void windowOpened(WindowEvent e) {
-                             
+                             System.out.println("asdasd");
                         }
 
                         @Override
@@ -107,7 +107,7 @@ public class MainApp  {
 
                         @Override
                         public void windowDeactivated(WindowEvent e) {
-                            // TODO Auto-generated method stub
+                            System.exit(0);
                             
                         }
                         
