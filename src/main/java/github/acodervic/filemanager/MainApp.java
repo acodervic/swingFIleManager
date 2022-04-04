@@ -1,5 +1,7 @@
 package github.acodervic.filemanager;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.IOException;
 
 import javax.swing.UIManager;
@@ -71,6 +73,45 @@ public class MainApp  {
                     MainFrame mainFrame = new MainFrame(GuiUtil.newLocalFIleStatic(linux?"/":"C://").get(), backgroundTaskManager,new LinuxDeviceMountter());
                     mainFrame.setSize(1200, 800);
                     mainFrame.setVisible(true);
+                    mainFrame.addWindowListener(new WindowListener() {
+
+                        @Override
+                        public void windowOpened(WindowEvent e) {
+                             
+                        }
+
+                        @Override
+                        public void windowClosing(WindowEvent e) {
+                             
+                        }
+
+                        @Override
+                        public void windowClosed(WindowEvent e) {
+                                System.exit(0);
+                        }
+
+                        @Override
+                        public void windowIconified(WindowEvent e) {
+                             
+                        }
+
+                        @Override
+                        public void windowDeiconified(WindowEvent e) {
+                             
+                        }
+
+                        @Override
+                        public void windowActivated(WindowEvent e) {
+                             
+                        }
+
+                        @Override
+                        public void windowDeactivated(WindowEvent e) {
+                            // TODO Auto-generated method stub
+                            
+                        }
+                        
+                    });
                 }else{
                      System.out.println("我们暂未对windows做好准备");
                 }
