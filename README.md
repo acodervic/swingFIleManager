@@ -1,5 +1,11 @@
 # swingFIleManager
-A beautiful file manager based on javaSwing
+A beautiful file manager based on javaSwing(一个好看的javaSwing编写的文件浏览器)
+
+# note
+The current version only supports linux system, because the author uses linux system, and may support other systems in the future, just need to modify a little code, but I don't have so much time and energy recently,
+
+目前版本只支持linux系统,因为作者使用linux系统,未来可能会支持其它系统,仅仅需要修改一点点代码即可,但是我最近没有那么多的时间和精力
+
 
 ## feature
 ### list 
@@ -50,5 +56,14 @@ A beautiful file manager based on javaSwing
 - ctrl+alt+q back
 - ctrl+alt+e go  
 
+# run 
+```bash
+YOUR_JAVA17HOME/bin/java -jar 
+```
 
+# build 
 
+need jdk java17 
+```bash
+mvn package 
+```
