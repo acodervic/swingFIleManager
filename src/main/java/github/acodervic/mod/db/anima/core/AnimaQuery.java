@@ -997,16 +997,21 @@ public class AnimaQuery<T extends Model> {
         this.beforeCheck();
         String  sql    = this.buildSelectSQL(true);
         List<T> models = this.queryList(modelClass, sql, paramValues);
-        // 绑定数据源
-        models.forEach((m) -> {
-            if (m != null && allOrOneProcessFun_opt != null) {
-                // 处理数据
-                allOrOneProcessFun_opt.accept(m);
-            }
-            m.bindDatabaseSource(getAnima());
-        });
+        if (models != null) {
+            // 绑定数据源
+            models.forEach((m) -> {
+                if (m != null && allOrOneProcessFun_opt != null) {
+                    // 处理数据
+                    allOrOneProcessFun_opt.accept(m);
+                }
+                m.bindDatabaseSource(getAnima());
+            });
 
-        this.setJoin(models);
+            this.setJoin(models);
+        }else{
+             models=new ArrayList<>();
+        }
+
         return models;
     }
 

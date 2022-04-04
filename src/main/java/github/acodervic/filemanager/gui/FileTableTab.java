@@ -156,7 +156,7 @@ public class FileTableTab  extends JPanel implements GuiUtil,FocusListener {
     }
 
     private void initPopmenus() {
-        List<Class> classsByPackageSuperClass = github.acodervic.mod.reflect.ReflectUtil.getClasssByPackageSuperClass("mrrobot.linux.filemanager.gui.popmenus", MyPopMenuItem.class);
+        List<Class> classsByPackageSuperClass = github.acodervic.mod.reflect.ReflectUtil.getClasssByPackageSuperClass("github.acodervic.filemanager.gui.popmenus", MyPopMenuItem.class);
         for (int i = 0; i < classsByPackageSuperClass.size(); i++) {
             try {
                 MyPopMenuItem popMenu=(MyPopMenuItem)classsByPackageSuperClass.get(i).newInstance();
