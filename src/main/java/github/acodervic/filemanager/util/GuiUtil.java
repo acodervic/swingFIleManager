@@ -186,6 +186,14 @@ public interface GuiUtil extends UtilFunInter {
         return System.getProperty("user.name");
     }
 
+    public default String getUserDIr() {
+        return getUserDIrStatic();
+    }
+
+    public static String getUserDIrStatic() {
+        return System.getProperty("user.dir");
+    }
+
     public default Opt<LocalFile> newLocalFIle(String path) {
         return newLocalFIleStatic(path);
     }

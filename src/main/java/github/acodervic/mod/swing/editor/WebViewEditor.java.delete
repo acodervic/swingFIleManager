@@ -1,0 +1,216 @@
+package mrrobot.mod.swing.editor;
+
+import java.util.concurrent.CountDownLatch;
+
+import org.w3c.dom.Element;
+
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.event.EventTarget;
+import javafx.scene.Scene;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import mrrobot.mod.code.Encode;
+import mrrobot.mod.data.CharUtil;
+import mrrobot.mod.data.Value;
+import mrrobot.mod.data.str;
+import mrrobot.mod.shell.SystemUtil;
+import netscape.javascript.JSObject;
+
+public class WebViewEditor extends JFXPanel {
+
+    private static final long serialVersionUID = -2775187245430549428L;
+    WebView webViewEditor;
+    String defalutCss = "font-weight:bold;color:black;";// 默认的编辑器样式
+    String fontSize = "font-size: 120%;";
+    boolean log = false;
+
+    public void onKeyWord() {
+        EventTarget el = (EventTarget) webViewEditor.getEngine().getDocument();
+
+    }
+
+    public void log(String mes) {
+        if (log) {
+            System.out.println(mes);
+        }
+    }
+
+    /**
+     * 读取当前选中文本(同步)
+     * 
+     * @return
+     */
+    public str getSelectedText() {
+        return new str(executeSyncScript("window.getSelection().toString();").getString());
+    }
+
+    public JSObject getCursorPosition() {
+        return executeSyncScript(" window.getSelection();").get(JSObject.class);
+    }
+
+    public void scrollToEnd() {
+        executeAsyncScript("document.getElementById('body').scrollTop = document.getElementById('body').scrollHeight;");
+    }
+
+    public Double getScrollPer() {
+        return Double.parseDouble(executeSyncScript(
+                " document.getElementById('body').scrollTop/document.getElementById('body').scrollHeight").get()
+                        .toString());
+    }
+
+    /**
+     * 读取当前文本(同步)
+     * 
+     * @return
+     */
+    public str getText() {
+        return new str(executeSyncScript("document.getElementById('editor').innerText"));
+    }
+
+    public void editable(boolean edit) {
+        executeAsyncScript("document.getElementById('editor').setAttribute('contenteditable','" + edit + "');");
+    }
+
+    public void setEditorCss(String css) {
+        executeAsyncScript("document.getElementById('editor').setAttribute('style','" + css + "');");
+    }
+
+    public void setBodyStyle(String css) {
+        executeAsyncScript("document.getElementById('body').setAttribute('style','" + css + "');");
+    }
+
+    /**
+     * 
+     */
+    public WebViewEditor() {
+        // 加载html
+        Platform.runLater(() -> {
+            webViewEditor = new WebView();
+            setScene(new Scene(webViewEditor));
+            String content = SystemUtil.getJarResources("editor.html").toString();
+            getEngine().loadContent(content);
+        });
+    }
+
+    public WebEngine getEngine() {
+        return this.webViewEditor.getEngine();
+    }
+
+    /**
+     * 执行脚本
+     * 
+     * @param script
+     */
+    private void executeAsyncScript(String script, String... varNames) {
+        Platform.runLater(() -> {
+            log("执行脚本:" + script);
+            Object executeScript = getEngine().executeScript(script);
+            // 释放内存
+            for (int i = 0; i < varNames.length; i++) {
+
+            }
+        });
+    }
+
+    /**
+     * 设置java对象给js访问
+     * 
+     * @param name
+     * @param javaObject
+     */
+    private void setJavaObjToJs(String name, Object javaObject) {
+        try {
+            JSObject jsobj = (JSObject) executeSyncScript("window").get();
+            Platform.runLater(() -> {
+                jsobj.setMember(name, javaObject);
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 执行脚本
+     * 
+     * @param script
+     * @throws InterruptedException
+     */
+    private Value executeSyncScript(String script) {
+        Value ret = new Value();
+        try {
+            CountDownLatch a = new CountDownLatch(1);
+            Platform.runLater(() -> {
+                log("执行脚本:" + script);
+                Object executeScript = getEngine().executeScript(script);
+                ret.setValue(executeScript);
+                a.countDown();
+            });
+            a.await();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ret;
+    }
+
+    private String getCss(String cssStyle) {
+        if (new str(cssStyle).notEmpty()) {
+            return cssStyle + ";" + fontSize;
+        }
+        return this.defalutCss + ";" + fontSize;
+    }
+
+    public void clearEditor() {
+        setText("", null);
+    }
+
+    public void appendImage(byte[] bytes, String cssStyle) {
+        str imageBase64 = new str(Encode.bytesToBase64Str(bytes));
+        if (imageBase64.notEmpty()) {
+
+            executeAsyncScript("  var img = document.createElement('img'); img.setAttribute('style', ' "
+                    + getCss(cssStyle) + "');img.setAttribute('src', 'data:image/png;base64," + imageBase64
+                    + "'); var editor=document.getElementById('editor');editor.append(img);");
+        }
+
+    }
+
+    /**
+     * 生成base64解码js函数
+     * 
+     * @param data
+     * @return
+     */
+    public String passData(String data) {
+        String randomVarName = CharUtil.getRandomStringNoMumberString(5);
+        setJavaObjToJs(randomVarName, data);
+        // 设置读取函数
+        return randomVarName;
+    }
+
+    public void appendText(String text, String cssStyle) {
+        // 对单引号进行转移
+        executeAsyncScript("  var pre = document.createElement('pre');  pre.innerHTML=" + passData(text)
+                + "; pre.setAttribute('style', ' " + getCss(cssStyle)
+                + "'); ;var editor=document.getElementById('editor');editor.append(pre);");
+    }
+
+    public void getBodyDom() {
+        getEngine().getDocument().getElementsByTagName("body").item(0);
+    }
+
+    public Element getEditorDOM() {
+        return getEngine().getDocument().getElementById("editor");
+    }
+
+    public void setText(String text, String cssStyle) {
+        executeAsyncScript("var editor=document.getElementById('editor');editor.innerHTML = '';");
+        // 加载html
+        if (text != null) {
+            // 对单引号进行转移
+            executeAsyncScript("  var pre = document.createElement('pre');   pre.innerHTML=" + passData(text)
+                    + ";  pre.setAttribute('style', ' " + getCss(cssStyle)
+                    + "'); ;var editor=document.getElementById('editor');editor.append(pre);");
+        }
+    }
+}

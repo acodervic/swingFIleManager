@@ -19,7 +19,6 @@ import github.acodervic.mod.utilFun;
 import github.acodervic.mod.data.DirRes;
 import github.acodervic.mod.db.anima.Anima;
 import github.acodervic.mod.db.anima.core.imlps.JdbiJDBC;
-
 public class MainApp  {
     static {
         System.setProperty("org.apache.commons.logging.Log",
@@ -43,7 +42,9 @@ public class MainApp  {
             try {
                 JdbiJDBC dataBase=new JdbiJDBC();
                 SQLiteDataSource ds = new SQLiteDataSource();
-                ds.setUrl("jdbc:sqlite:/home/w/Documents/localgitserver/filemanager/db");
+                String url = GuiUtil.getUserDIrStatic()+"/db";
+                System.out.println("open database file "+url);
+                ds.setUrl("jdbc:sqlite:"+url);
                 Boolean open = dataBase.open(ds);
                 if (!open) {
                     TaskDialogs.showException(new FileManagerException("Cant load dataBase file "));

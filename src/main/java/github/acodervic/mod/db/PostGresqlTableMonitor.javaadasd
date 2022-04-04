@@ -1,0 +1,80 @@
+package mrRobot.msfguiclient.model.db;
+
+import java.sql.Connection;
+import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
+
+import com.impossibl.postgres.api.jdbc.PGConnection;
+import com.impossibl.postgres.api.jdbc.PGNotificationListener;
+
+import anima.Anima;
+import anima.Model;
+import anima.core.AnimaCache;
+import anima.event.EventActionEnum;
+import anima.event.RowChangeEvent;
+import static mrrobot.mod.data.BaseUtil.nullCheck;
+import mrrobot.mod.data.str;
+import mrrobot.mod.db.TableMoniter;
+import mrrobot.mod.thread.TimePool;
+import static mrRobot.utilFun.*;
+
+/**
+ * 表监视器组
+ * 
+ * @param <T>
+ *
+ * @param <T>
+ *
+ * @param <T>
+ */
+public class PostGresqlTableMonitor<T extends Model> extends TableMoniter {
+
+    boolean started = false;
+    Anima anima;// 数据库
+    static final String channelName = "q_event";
+    PGConnection connection;
+
+    @Override
+    public boolean start() {
+        if (this.started == false && this.anima != null) {
+            this.anima.setTableMonitor(this);
+            try {
+                connection = (PGConnection) this.anima.getSql2o().getConnectionSource().getConnection();// 确保已经正确连接
+                // 注意此操作只有在当前vm中
+                connection.addNotificationListener(new PGNotificationListener() {
+                    @Override
+                    public void notification(int processId, String channelName, String payload) {
+                        // 接收到通知
+                        str data = new str(payload);
+                        if (data.notEmpty()) {
+                            RowChangeEvent event = data.toObject(RowChangeEvent.class);
+                            // 通知并转发事件
+                            onRowChanged(event);
+                        }
+                    };
+                });
+                // 启动监听
+                Statement statement = connection.createStatement();
+                statement.execute("LISTEN " + channelName);
+                statement.close();
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param anima
+     */
+    public PostGresqlTableMonitor(Anima anima) {
+        this.anima = anima;
+    }
+
+}
