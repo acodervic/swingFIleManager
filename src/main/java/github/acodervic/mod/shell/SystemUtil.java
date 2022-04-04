@@ -366,30 +366,7 @@ public class SystemUtil {
         return chinses;
     }
 
-    static TransApi baiduTran = new TransApi("20200610000491698", "qJw_J81bkOPrenmzMKBN");
-
-    /**
-     * 百度翻译
-     * 
-     * @param data
-     * @param hClient_opt
-     * @return
-     */
-    public static str baiduAPITran(String data, HttpClient hClient_opt) {
-        if (data == null) {
-            return new str("");
-        }
-        // 已经翻译过
-        if (translatedMap.containsKey(data)) {
-            return new str(translatedMap.get(data));
-        }
-        String transResult = baiduTran.getTransResult(data);
-        if (transResult != null && transResult.length() > 0) {
-            translatedMap.put(data, transResult);
-            return new str(transResult);
-        }
-        return new str(data);
-    }
+ 
     /**
      * 词霸翻译,翻译失败则返回null
      * @param data
