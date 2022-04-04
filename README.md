@@ -15,40 +15,40 @@ The current version only supports linux system, because the author uses linux sy
 
 
 ### list 
-![](https://github.com/acodervic/swingFIleManager/blob/main/images/list.png)
+![](images/list.png)
 
 ### multi-panel view
-![](https://github.com/acodervic/swingFIleManager/blob/main/images/tree.png)
+![](images/tree.png)
 
 ### sftp remote manager
-![](https://github.com/acodervic/swingFIleManager/blob/main/images/sftp.png)
+![](images/sftp.png)
 
 ### terminal 
-![](https://github.com/acodervic/swingFIleManager/blob/main/images/terminal.png)
+![](images/terminal.png)
 
 ### compression
-![](https://github.com/acodervic/swingFIleManager/blob/main/images/compression.png)
+![](images/compression.png)
 
 ### popmenus
 
-![](https://github.com/acodervic/swingFIleManager/blob/main/images/popmenus.png)
+![](images/popmenus.png)
 
 ### Image/Video Thumbnail
- ![](https://github.com/acodervic/swingFIleManager/blob/main/images/image.png)
+ ![](images/image.png)
 
 ### copy&move
-![](https://github.com/acodervic/swingFIleManager/blob/main/images/copy.gif)
+![](images/copy.gif)
 
 ### bookmarks
-![](https://github.com/acodervic/swingFIleManager/blob/main/images/bookmarks.png)
+![](images/bookmarks.png)
 
 ### deepsearch
-![](https://github.com/acodervic/swingFIleManager/blob/main/images/deepsearch.gif)
+![](images/deepsearch.gif)
 ### buttongroup
-![](https://github.com/acodervic/swingFIleManager/blob/main/images/buttongroup.gif)
+![](images/buttongroup.gif)
 
 ### autoSync(only localFileSystem)
-![](https://github.com/acodervic/swingFIleManager/blob/main/images/autorefresh.gif)
+![](images/autorefresh.gif)
 
 
 ## hotKeys
