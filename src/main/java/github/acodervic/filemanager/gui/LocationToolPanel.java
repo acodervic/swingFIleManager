@@ -448,10 +448,8 @@ public class LocationToolPanel extends MainFramePanel {
             FileSystemOptions opts = new FileSystemOptions();
             SftpFileSystemConfigBuilder instance = SftpFileSystemConfigBuilder.getInstance();
             instance.setStrictHostKeyChecking(opts, "no");
-            instance.setKnownHosts(opts, new File("/home/w/.ssh/known_hosts"));
             instance.setUserDirIsRoot(opts, true);
             //instance.setTimeout(opts, 10000);
-            //instance.setIdentityProvider(opts, new BytesIdentityInfo(new FileRes("/home/w/.ssh/id_rsa").readBytes(), null));
             instance.setConnectTimeout(opts, Duration.ofMillis(1000) );//10s超时
     
             // Create the SFTP URI using the host name, userid, password, remote

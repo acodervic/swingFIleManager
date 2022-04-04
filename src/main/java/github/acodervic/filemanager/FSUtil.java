@@ -19,8 +19,7 @@ import github.acodervic.mod.db.anima.core.imlps.JdbiJDBC;
 import github.acodervic.mod.io.IoType;
 
 public class FSUtil implements GuiUtil {
-    static String bookMarkFilePath = "/home/w/.config/gtk-3.0/bookmarksjava";
-
+ 
 
     static Anima db=null; 
  
@@ -45,7 +44,6 @@ public class FSUtil implements GuiUtil {
      * @return
      */
     public static List<BookMark> readAllBookMarks() {
-        FileRes bookMarkFile = new FileRes(bookMarkFilePath);
         List<BookMark> all = db.selectFrom(BookMark.class).all();
         return all;
     }

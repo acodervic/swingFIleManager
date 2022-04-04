@@ -140,7 +140,7 @@ public class MainLeftPanel extends MainFramePanel {
     public DefaultMutableTreeNode getDesktopDir() {
         if (isNull(desktopDir)) {
                 try {
-                    desktopDir=new DefaultMutableTreeNode(new RESWallper(newLocalFIle(getHomeDirPath()+"Desktopk").get() , "桌面", Icons.userDesktop) );
+                    desktopDir=new DefaultMutableTreeNode(new RESWallper(newLocalFIle(getHomeDirPath()+"/Desktop").get() , "桌面", Icons.userDesktop) );
                 } catch (Exception e) {
                     e.printStackTrace();
                 }            
@@ -225,7 +225,7 @@ public class MainLeftPanel extends MainFramePanel {
     public DefaultMutableTreeNode getTrashDir() {
         if (isNull(trashDir)) {
             try {
-                trashDir=new DefaultMutableTreeNode(new RESWallper(newLocalFIle("/home/w/.local/share/Trash/files").get(), "Trash", Icons.getIconByName("put-trash")) );
+                trashDir=new DefaultMutableTreeNode(new RESWallper(newLocalFIle(getUserHome()+"/.local/share/Trash/files").get(), "Trash", Icons.getIconByName("put-trash")) );
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -384,6 +384,10 @@ public class MainLeftPanel extends MainFramePanel {
         getAllTree().expandAllNode();
     }
 
+    /**
+     * 获取当前用户目录 结尾没有/
+     * @return
+     */
     public String  getHomeDirPath() {
         if (isLinux()) {
             if (getUser().equals("root")) {
@@ -398,9 +402,6 @@ public class MainLeftPanel extends MainFramePanel {
 
     public void binPopToFilteredTree(FilteredTree treePanel) {
         JTree tree = treePanel.getTree();
-        treePanel.getRootNode().ifNotNull_(node -> {
-
-        });
         tree.addMouseMotionListener(new MouseMotionListener() {
 
             @Override

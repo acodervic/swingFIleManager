@@ -876,18 +876,7 @@ public class RESWallper implements GuiUtil {
         this.icon=null;
         this.userIcon=null;
     }
-
-    public static void main(String[] args) throws IOException {
-        Path path2 = new File("/home/w/Music/用户注册.html").toPath();
-        String attr="user:cocustIcon";
-        byte[]  data="/home/w/mytool/images/bricks.png".getBytes();
-        ByteBuffer buffer = ByteBuffer.allocate(data.length);
-        buffer.wrap(data);
-        //Files.setAttribute(path2, attr,  ByteBuffer.wrap(data));
-        byte[] attribute = (byte[])Files.getAttribute(path2, attr);
-        System.out.println(new String(attribute));
-    }
-
+ 
 
     public boolean removeFIleObjFromThis(RESWallper file) {
         return childs.remove(file.getFileObj());

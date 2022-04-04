@@ -234,9 +234,4 @@ public class XdgOpenConfigManager implements GuiUtil {
     }
     
 
-    public static void main(String[] args) throws IOException {
-        String exec2String = utilFun.exec2String("/home/w/Applications/VSCodium-1.65.0-1646403795.glibc2.17-x86_64_a569585356c5fa7767d0be4fd74c141d.AppImage");
-        System.out.println(exec2String);
-        utilFun.sleep(10000);
-    }
 }

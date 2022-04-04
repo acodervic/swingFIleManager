@@ -69,9 +69,7 @@ public class MainCenterTabsPanel extends MainFramePanel implements ChangeListene
         } catch (FileSystemException e) {
             e.printStackTrace();
         }
-        //addFilesTableTab(new DirRes("/home/w/Music/"));
-        //addFilesTableTab(new DirRes("/home/w/Downloads/"));
-        //addFilesTableTab(new DirRes("/home/w/.msf4/"));
+ 
  
  
     }

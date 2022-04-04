@@ -16,22 +16,7 @@ import github.acodervic.mod.data.FileRes;
 
 public class ZipRes extends CompreserBase<ZipArchiveOutputStream> {
 
-    public static void main(String[] args) throws IOException {
-        // 从磁盘压缩
-        ZipRes zip = new ZipRes();
-        zip.getRootDir().addDir(new DirRes("/home/w/Downloads/111/apache-tomcat-8"), false);
-        zip.getRootDir().addFile(new FileRAM("hahahah", "adadad".getBytes()));
-        zip.packToDisk(new FileRes("/home/w/Downloads/111/test.zip"));// 导出压缩包
-        // 解压
-        ZipRes zip2 = new ZipRes(new FileRes("/home/w/Downloads/111/test.zip"));
-        zip2.loadCompreserArchiveFIleToRAMTree();// 加载压缩包到文件树
-        zip2.unPackToDir(new DirRes("/home/w/Downloads/112"));
-        // 从内存文件树直接创建压缩文件到磁盘
-        DirRAM dirRAM = new DirRAM(new DirRes("/home/w/Downloads/111/apache-tomcat-8"));
-        dirRAM.fixChirdenFileAndDirFullPath();// 将磁盘文件树的绝对路径转换为相对路径
-        ZipRes zipRes = new ZipRes(dirRAM);
-        zipRes.packToDisk(new FileRes("/home/w/Downloads/111/test2.zip"));
-    }
+ 
 
 
     @Override

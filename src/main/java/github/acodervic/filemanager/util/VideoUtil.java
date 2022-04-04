@@ -78,12 +78,6 @@ public class VideoUtil {
         BufferedImage bufferedImage = converter.getBufferedImage(frame);
         return bufferedImage;
     }
-
-    public static void main(String[] args) throws Exception{
-        String videoFileName = "/home/w/Music/video_2022-03-29_22-18-44.mp4";
-        System.out.println(getVideoImgByFrameIndex(new File(videoFileName),new File("123.png"),f  ->{
-            return f-203;
-        }));
-    }
+ 
 
 }

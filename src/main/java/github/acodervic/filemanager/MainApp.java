@@ -4,6 +4,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
 
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 import org.oxbow.swingbits.dialog.task.TaskDialogs;
@@ -73,45 +74,7 @@ public class MainApp  {
                     MainFrame mainFrame = new MainFrame(GuiUtil.newLocalFIleStatic(linux?"/":"C://").get(), backgroundTaskManager,new LinuxDeviceMountter());
                     mainFrame.setSize(1200, 800);
                     mainFrame.setVisible(true);
-                    mainFrame.addWindowListener(new WindowListener() {
-
-                        @Override
-                        public void windowOpened(WindowEvent e) {
-                             System.out.println("asdasd");
-                        }
-
-                        @Override
-                        public void windowClosing(WindowEvent e) {
-                             
-                        }
-
-                        @Override
-                        public void windowClosed(WindowEvent e) {
-                                System.exit(0);
-                        }
-
-                        @Override
-                        public void windowIconified(WindowEvent e) {
-                             
-                        }
-
-                        @Override
-                        public void windowDeiconified(WindowEvent e) {
-                             
-                        }
-
-                        @Override
-                        public void windowActivated(WindowEvent e) {
-                             
-                        }
-
-                        @Override
-                        public void windowDeactivated(WindowEvent e) {
-                            System.exit(0);
-                            
-                        }
-                        
-                    });
+                    mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 }else{
                      System.out.println("我们暂未对windows做好准备");
                 }

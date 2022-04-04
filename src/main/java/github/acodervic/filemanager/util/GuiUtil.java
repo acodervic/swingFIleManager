@@ -182,6 +182,9 @@ public interface GuiUtil extends UtilFunInter {
     }
 
 
+    public default String getUserHome() {
+        return System.getProperty("user.home");
+    }
     public default String getUser() {
         return System.getProperty("user.name");
     }

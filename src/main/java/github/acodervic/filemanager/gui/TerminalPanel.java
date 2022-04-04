@@ -24,11 +24,12 @@ import com.jediterm.terminal.ui.UIUtil;
 import com.pty4j.PtyProcess;
 import com.pty4j.PtyProcessBuilder;
 
+import github.acodervic.filemanager.util.GuiUtil;
 import github.acodervic.mod.data.Opt;
 
 //TODO: Keep a global StringBuilder to decrease memory footprint
 
-public class TerminalPanel extends JPanel {
+public class TerminalPanel extends JPanel implements GuiUtil {
     Thread ptyThread;
     Opt<JediTermWidget> terminal=new Opt<>();
 
@@ -67,7 +68,7 @@ public class TerminalPanel extends JPanel {
         return terminal.get();
     }
 
-    private static TtyConnector createTtyConnector() {
+    private   TtyConnector createTtyConnector() {
         try {
             Map<String, String> envs = System.getenv();
             // log.debug(envs.get("Path"));
@@ -79,7 +80,7 @@ public class TerminalPanel extends JPanel {
                 envs = new HashMap<>(System.getenv());
                 envs.put("TERM", "xterm-256color");
             }
-            PtyProcess process = new PtyProcessBuilder().setDirectory("/home/w").setCommand(command)
+            PtyProcess process = new PtyProcessBuilder().setDirectory(getUserHome()).setCommand(command)
                     .setEnvironment(envs).start();
 
             PtyProcessTtyConnector ptyProcessTtyConnector = new PtyProcessTtyConnector(process, StandardCharsets.UTF_8);
@@ -89,26 +90,5 @@ public class TerminalPanel extends JPanel {
             throw new IllegalStateException(e);
         }
     }
-
-    public static void main(String[] args) {
-        JFrame jFrame = new JFrame();
-        CmdSettingsProvider cmdSettingsProvider = new CmdSettingsProvider();
-        cmdSettingsProvider.setDefaultStyle(new TextStyle(
-            TerminalColor.rgb(
-                    UIManager.getColor("Panel.foreground").getRed(),
-                    UIManager.getColor("Panel.foreground").getGreen(),
-                    UIManager.getColor("Panel.foreground").getBlue()),
-            TerminalColor.rgb(
-                    UIManager.getColor("Table.background").getRed(),
-                    UIManager.getColor("Table.background").getGreen(),
-                    UIManager.getColor("Table.background").getBlue())));
-        JediTermWidget terminalPanel = new JediTermWidget(cmdSettingsProvider);
-
-        terminalPanel.setDebugGraphicsOptions( DebugGraphics.NONE_OPTION);
-        terminalPanel.setTtyConnector(createTtyConnector());
-        terminalPanel.start();
-        int debugGraphicsOptions = terminalPanel.getDebugGraphicsOptions();
-        jFrame.add(terminalPanel, BorderLayout.CENTER);
-        jFrame.setVisible(true);
-    }
+ 
 }
