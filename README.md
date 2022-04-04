@@ -43,7 +43,7 @@ The current version only supports linux system, because the author uses linux sy
 ![](images/bookmarks.png)
 
 ### deepsearch
-![](images/deepsearch.gif)
+![](images/deepsreach.gif)
 ### buttongroup
 ![](images/buttongroup.gif)
 
