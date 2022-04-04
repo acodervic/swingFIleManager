@@ -13,7 +13,7 @@ The current version only supports linux system, because the author uses linux sy
 - Single-window Start a single window when starting the jvm（default）启动程序的时候自动启动一个窗口,当窗口被关闭则进程退出
 - When the jvm is started, the window is not started by default. When the user requests http://127.0.0.1:64213/newWindow", a window is automatically created, allowing multiple windows to exist,use arg api "java17_home/bin/java -jar  filemanager-1.0-SNAPSHOT.jar  api ".  启动程序的时候不启动任何窗口,请求http://127.0.0.1:64213/newWindow自动创建窗口,
 
-
+下面图片显示不出来是被墙了,githubusercontent.com国内有时候访问不了
 ### list 
 ![](images/list.png)
 
