@@ -1,5 +1,6 @@
 # swingFIleManager
 A beautiful file manager based on javaSwing(一个好看的javaSwing编写的文件浏览器)
+![](images/tree.png)
 
 # note
 The current version only supports linux system, because the author uses linux system, and may support other systems in the future, just need to modify a little code, but I don't have so much time and energy recently,
